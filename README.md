@@ -2,6 +2,9 @@
 
 Uma interpretação moderna do clássico jogo Asteroids da Atari, apresentando um sistema visual único de profundidade 3D através de interpolação de cores e rolagem paralaxe.
 
+https://github.com/user-attachments/assets/177578a6-48f4-482b-a9ea-5046822ac80f
+
+
 ## História de Origem
 
 Este projeto nasceu de uma troca criativa no LinkedIn. Após ver meu jogo [Dino Run - Vecna Edition](https://github.com/elen-c-sales/dino-run-vecna-edition), Rafaela Catharina Pechtoll Pereira se inspirou e criou uma visualização de campo estelar usando Pygame - uma exibição hipnotizante de estrelas em três cores, controladas pelo movimento do mouse.
