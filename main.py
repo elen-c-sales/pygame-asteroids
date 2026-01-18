@@ -106,14 +106,36 @@ def main():
     estado_jogo = 'jogando'  # 'jogando' ou 'game_over'
     pontuacao_final = 0
     
+    # Sistema de dificuldade progressiva
+    nivel = 1
+    pontos_por_nivel = 500  # Pontos necessários para subir de nível
+    
+    def calcular_dificuldade():
+        """Calcula o nível atual baseado na pontuação"""
+        return (pontos // pontos_por_nivel) + 1
+    
+    def get_multiplicador_velocidade():
+        """Retorna multiplicador de velocidade baseado no nível"""
+        return 1.0 + (nivel - 1) * 0.15  # +15% por nível
+    
+    def get_intervalo_spawn():
+        """Retorna intervalo de spawn baseado no nível"""
+        # Diminui o intervalo, mas nunca menos que 1.5 segundos
+        return max(1.5, 4.0 - (nivel - 1) * 0.3)
+    
+    def get_max_asteroides():
+        """Retorna número máximo de asteroides baseado no nível"""
+        return min(15, 8 + (nivel - 1) * 1)  # Máximo de 15 asteroides
+    
     def resetar_jogo():
         """Reseta o jogo para um novo round"""
-        nonlocal pontos, vidas, asteroides, projeteis, nave, tempo_spawn, estado_jogo, particulas, ship_debris
+        nonlocal pontos, vidas, asteroides, projeteis, nave, tempo_spawn, estado_jogo, particulas, ship_debris, nivel
         
         pontos = 0
         vidas = 3
         tempo_spawn = 0
         estado_jogo = 'jogando'
+        nivel = 1  # Resetar nível
         
         # Resetar nave
         nave.pos = pygame.math.Vector2(LARGURA // 2, ALTURA // 2)
@@ -209,10 +231,26 @@ def main():
             for asteroide in asteroides[:]:
                 asteroide.atualizar(dt, LARGURA, ALTURA)
             
-            # Spawnar novos asteroides periodicamente
+            # Atualizar nível baseado na pontuação
+            nivel_anterior = nivel
+            nivel = calcular_dificuldade()
+            
+            # Notificar subida de nível
+            if nivel > nivel_anterior and nivel > 1:
+                # Aqui poderia adicionar som ou efeito visual de level up
+                pass
+            
+            # Spawnar novos asteroides periodicamente (com dificuldade progressiva)
+            intervalo_atual = get_intervalo_spawn()
+            max_asteroides_atual = get_max_asteroides()
+            multiplicador_vel = get_multiplicador_velocidade()
+            
             tempo_spawn += dt
-            if tempo_spawn >= intervalo_spawn and len(asteroides) < 8:
-                asteroides.append(spawn_asteroide('grande'))
+            if tempo_spawn >= intervalo_atual and len(asteroides) < max_asteroides_atual:
+                novo_asteroide = spawn_asteroide('grande')
+                # Aplicar multiplicador de velocidade baseado no nível
+                novo_asteroide.vel *= multiplicador_vel
+                asteroides.append(novo_asteroide)
                 tempo_spawn = 0
             
             # Colisão: Projéteis vs Asteroides
@@ -352,9 +390,13 @@ def main():
         vidas_text = fonte.render(f"VIDAS: {vidas}", True, (255, 255, 255))
         tela.blit(vidas_text, (10, 50))
         
+        # Nível
+        nivel_text = fonte.render(f"NÍVEL: {nivel}", True, (255, 200, 100))
+        tela.blit(nivel_text, (10, 80))
+        
         # Asteroides na tela
         ast_text = fonte.render(f"Asteroides: {len(asteroides)}", True, (150, 150, 150))
-        tela.blit(ast_text, (10, 80))
+        tela.blit(ast_text, (10, 110))
         
         # FPS
         fps_text = fonte.render(f"FPS: {int(clock.get_fps())}", True, (100, 100, 100))

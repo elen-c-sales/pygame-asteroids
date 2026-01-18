@@ -221,6 +221,107 @@ if vidas <= 0:
     pontuacao_final = pontos
 ```
 
+## Sistema de Dificuldade Progressiva
+
+O jogo implementa um sistema de escalonamento de dificuldade adaptativo que aumenta o desafio baseado na performance do jogador.
+
+### Cálculo de Nível
+
+O nível é calculado dinamicamente com base na pontuação:
+
+```python
+def calcular_dificuldade():
+    """Calcula o nível atual baseado na pontuação"""
+    return (pontos // pontos_por_nivel) + 1
+
+# Atualização contínua durante o jogo
+nivel = calcular_dificuldade()
+```
+
+Com `pontos_por_nivel = 500`, o jogador avança um nível a cada 500 pontos.
+
+### Multiplicadores de Dificuldade
+
+#### Velocidade dos Asteroides
+
+```python
+def get_multiplicador_velocidade():
+    """Retorna multiplicador de velocidade baseado no nível"""
+    return 1.0 + (nivel - 1) * 0.15  # +15% por nível
+```
+
+A velocidade aumenta linearmente:
+- Nível 1: Velocidade normal (1.0x)
+- Nível 2: +15% velocidade (1.15x)
+- Nível 5: +60% velocidade (1.6x)
+- Nível 10: +135% velocidade (2.35x)
+
+#### Intervalo de Spawn
+
+```python
+def get_intervalo_spawn():
+    """Retorna intervalo de spawn baseado no nível"""
+    return max(1.5, 4.0 - (nivel - 1) * 0.3)
+```
+
+O intervalo diminui progressivamente:
+- Nível 1: 4.0 segundos
+- Nível 3: 3.4 segundos
+- Nível 5: 2.8 segundos
+- Nível 9+: 1.5 segundos (mínimo)
+
+#### Quantidade Máxima de Asteroides
+
+```python
+def get_max_asteroides():
+    """Retorna número máximo de asteroides baseado no nível"""
+    return min(15, 8 + (nivel - 1) * 1)
+```
+
+O limite aumenta gradualmente:
+- Nível 1: 8 asteroides
+- Nível 5: 12 asteroides
+- Nível 8+: 15 asteroides (máximo)
+
+### Aplicação da Dificuldade
+
+Os multiplicadores são aplicados durante o spawn de asteroides:
+
+```python
+if tempo_spawn >= intervalo_atual and len(asteroides) < max_asteroides_atual:
+    novo_asteroide = spawn_asteroide('grande')
+    novo_asteroide.vel *= multiplicador_vel  # Aplicar velocidade escalonada
+    asteroides.append(novo_asteroide)
+```
+
+### Curva de Dificuldade
+
+| Nível | Pontos | Velocidade | Spawn (s) | Max Asteroides |
+|-------|--------|------------|-----------|----------------|
+| 1 | 0 | 1.0x | 4.0 | 8 |
+| 2 | 500 | 1.15x | 3.7 | 9 |
+| 3 | 1000 | 1.30x | 3.4 | 10 |
+| 5 | 2000 | 1.60x | 2.8 | 12 |
+| 7 | 3000 | 1.90x | 2.2 | 14 |
+| 9+ | 4000+ | 2.20x+ | 1.5 | 15 |
+
+### Feedback Visual
+
+O nível atual é exibido no HUD em cor laranja para diferenciação:
+
+```python
+nivel_text = fonte.render(f"NÍVEL: {nivel}", True, (255, 200, 100))
+```
+
+### Considerações de Design
+
+O sistema foi calibrado para:
+
+1. **Acessibilidade inicial**: Nível 1 permite aprendizado dos controles
+2. **Progressão suave**: Aumentos incrementais evitam saltos abruptos
+3. **Teto de dificuldade**: Limites máximos previnem impossibilidade
+4. **Recompensa de habilidade**: Jogadores experientes enfrentam desafios maiores
+
 ## Considerações de Performance
 
 ### Pooling de Objetos
