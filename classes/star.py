@@ -24,7 +24,7 @@ class Star:
         self.largura_tela = largura_tela
         self.altura_tela = altura_tela
         
-        # Tamanho baseado em profundidade (máximo 2px para parecer realista)
+        # Tamanho baseado em profundidade
         # Estrelas distantes: 1px, Estrelas próximas: 2px
         if self.profundidade < 0.5:
             self.tamanho = 1
@@ -34,7 +34,7 @@ class Star:
         # Cor interpolada (azul escuro -> branco)
         self.cor = interpolar_cor(profundidade)
         
-        # Velocidade muito lenta para céu quase estático (paralaxe sutil)
+        # Velocidade muito lenta para céu quase estático
         # Estrelas mais próximas se movem levemente mais rápido
         self.velocidade = 3 * self.profundidade  # Reduzido de 20 para 3
     
