@@ -93,8 +93,10 @@ GitHub Pages pode levar 2-5 minutos para fazer o primeiro deploy.
 
 Seu jogo estará disponível em:
 ```
-https://elen-c-sales.github.io/pygame-asteroids/
+https://<seu-usuario>.github.io/pygame-asteroids/
 ```
+
+Substitua `<seu-usuario>` pelo seu username do GitHub.
 
 ## Atualizações Futuras
 
@@ -172,8 +174,10 @@ docs/
 Adicione ao README para mostrar o status do deployment:
 
 ```markdown
-[![GitHub Pages](https://img.shields.io/badge/demo-online-green.svg)](https://elen-c-sales.github.io/pygame-asteroids/)
+[![GitHub Pages](https://img.shields.io/badge/demo-online-green.svg)](https://<seu-usuario>.github.io/pygame-asteroids/)
 ```
+
+Substitua `<seu-usuario>` pelo seu username do GitHub.
 
 ## Recursos Adicionais
 
