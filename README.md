@@ -4,7 +4,7 @@ Uma interpretação moderna do clássico jogo Asteroids da Atari, apresentando u
 
 ## 🎮 Jogar Agora
 
-**[▶️ JOGAR NO NAVEGADOR](https://elen-c-sales.github.io/pygame-asteroids/)** _(em breve)_
+**[▶️ JOGAR NO NAVEGADOR](https://elen-c-sales.github.io/pygame-asteroids/)**
 
 Ou baixe para jogar na versão desktop com melhor performance.
 
@@ -64,10 +64,10 @@ Isso cria uma curva envolvente onde os níveis iniciais são acessíveis enquant
 
 Este jogo está disponível em duas versões:
 
-### 🌐 Versão Web (Recomendada para teste rápido)
+### Versão Web (Recomendada para teste rápido)
 
 Jogue diretamente no navegador sem instalação:
-**[elen-c-sales.github.io/pygame-asteroids](https://elen-c-sales.github.io/pygame-asteroids/)** _(em breve)_
+**[elen-c-sales.github.io/pygame-asteroids](https://elen-c-sales.github.io/pygame-asteroids/)**
 
 ### 💻 Versão Desktop (Melhor performance)
 
