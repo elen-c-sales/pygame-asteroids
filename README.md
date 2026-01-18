@@ -2,6 +2,9 @@
 
 Uma interpretação moderna do clássico jogo Asteroids da Atari, apresentando um sistema visual único de profundidade 3D através de interpolação de cores e rolagem paralaxe.
 
+https://github.com/user-attachments/assets/45922754-a0f3-4682-9790-9c348d69de92
+
+
 ## 🎮 Jogar Agora
 
 **[▶️ JOGAR NO NAVEGADOR](https://elen-c-sales.github.io/pygame-asteroids/)**
