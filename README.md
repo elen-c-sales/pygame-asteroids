@@ -160,7 +160,8 @@ Para informações técnicas detalhadas sobre a implementação, incluindo o sis
 **GitHub**: [@elen-c-sales](https://github.com/elen-c-sales/)
 
 **Inspiração**: Visualização de campo estelar de Rafaela Catharina Pechtoll Pereira  
-**Jogo Original**: Asteroids da Atari (1979)
+**Jogo Original**: Asteroids da Atari (1979)  
+**Efeitos Sonoros**: Gerados com [Bfxr](https://www.bfxr.net/)
 
 ## Licença
 
